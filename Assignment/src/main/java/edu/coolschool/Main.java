@@ -4,16 +4,21 @@ import edu.coolschool.students.StudentRecord;
 import edu.coolschool.utilities.CountriesEnum;
 import edu.coolschool.utilities.PersonInfo;
 import edu.coolschool.utilities.dateutils.DateRecord;
+import edu.coolschool.utilities.dateutils.MonthsEnum;
 
 public class Main {
     public static void main(String[] args) {
+
         System.out.println("Hello, welcome to the Cool School Student Record System!");
 
+        // Student Date of Birth (using Builder + MonthsEnum)
         DateRecord studentDOB = new DateRecord.Builder()
                 .setDay(15)
-                .setMonth(3)
+                .setMonth(MonthsEnum.MARCH)
                 .setYear(2002)
                 .build();
+
+        // Enrollment Date (using int constructor)
         DateRecord enrollmentDate = new DateRecord(1, 9, 2020);
 
         PersonInfo studentInfo = new PersonInfo.Builder()
@@ -41,12 +46,12 @@ public class Main {
                 .build();
 
         StudentRecord studentRecord = new StudentRecord.Builder()
-            .setStudentInfo(studentInfo)
-            .setStudentID("123456789")
-            .setFatherInfo(fatherInfo)
-            .setMotherInfo(motherInfo)
-            .setEnrollmentDate(enrollmentDate)
-            .build();
+                .setStudentInfo(studentInfo)
+                .setStudentID("123456789")
+                .setFatherInfo(fatherInfo)
+                .setMotherInfo(motherInfo)
+                .setEnrollmentDate(enrollmentDate)
+                .build();
 
         System.out.println(studentRecord);
     }

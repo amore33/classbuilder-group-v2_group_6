@@ -1,0 +1,71 @@
+package autogradertests;
+
+import edu.coolschool.students.StudentRecord;
+import edu.coolschool.utilities.PersonInfo;
+import edu.coolschool.utilities.CountriesEnum;
+import edu.coolschool.utilities.dateutils.DateRecord;
+import edu.coolschool.utilities.dateutils.MonthsEnum;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class LastnameFirstnameTestcases {
+
+    @Test
+    public void testValidStudentRecord() {
+        PersonInfo student = new PersonInfo.Builder()
+                .setFirstName("John")
+                .setLastName("Doe")
+                .setDateOfBirth(new DateRecord.Builder()
+                        .setDay(1)
+                        .setMonth(MonthsEnum.JANUARY)
+                        .setYear(2010)
+                        .build())
+                .setCountryOfResidence(CountriesEnum.US)
+                .setCountryOfBirth(CountriesEnum.US)
+                .build();
+
+        DateRecord enrollment = new DateRecord.Builder()
+                .setDay(1)
+                .setMonth(MonthsEnum.SEPTEMBER)
+                .setYear(2020)
+                .build();
+
+        StudentRecord record = new StudentRecord.Builder()
+                .setStudentInfo(student)
+                .setStudentID("ABC123456")
+                .setEnrollmentDate(enrollment)
+                .build();
+
+        assertEquals("ABC123456", record.studentID());
+    }
+
+    @Test
+    public void testInvalidStudentID() {
+        PersonInfo student = new PersonInfo.Builder()
+                .setFirstName("John")
+                .setLastName("Doe")
+                .setDateOfBirth(new DateRecord.Builder()
+                        .setDay(1)
+                        .setMonth(MonthsEnum.JANUARY)
+                        .setYear(2010)
+                        .build())
+                .setCountryOfResidence(CountriesEnum.US)
+                .setCountryOfBirth(CountriesEnum.US)
+                .build();
+
+        DateRecord enrollment = new DateRecord.Builder()
+                .setDay(1)
+                .setMonth(MonthsEnum.SEPTEMBER)
+                .setYear(2020)
+                .build();
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            new StudentRecord.Builder()
+                    .setStudentInfo(student)
+                    .setStudentID("SHORT")
+                    .setEnrollmentDate(enrollment)
+                    .build();
+        });
+    }
+}
